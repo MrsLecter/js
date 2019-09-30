@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CloseMessage</title>
+</head>
+<style>
+body {
+	display: block;
+	overflow: hidden;
+	height: 500px;
+	width: 1000px;
+}
+</style>
+<body onload="sendMessage()">
+
+<script>
+'use strict'
+function sendMessage(){
+	var randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+	var newMessage = document.createElement("div");
+	newMessage.style.width = 250 + "px";
+	newMessage.style.height = 50 + "px";
+	newMessage.style.backgroundColor = randomColor;
+	newMessage.style.borderWidth = 2 + "px";
+	newMessage.style.borderStyle = "solid";
+	newMessage.style.borderRadius = 10 + "px";
+	newMessage.style.opacity = 0.75;
+	newMessage.style.borderColor = "black";
+	newMessage.style.marginTop = 10 + "px";
+	newMessage.style.position = "relative";
+	newMessage.style.textAlign = "center";
+	newMessage.style.padding = 10 + "px";
+	newMessage.style.zIndex = 2;
+	newMessage.style.left = 92 + "%";
+	newMessage.style.scroll = "auto";
+	newMessage.scrollIntoView = "true";
+	var messageContent = document.createTextNode("New message!!!"); 
+	var messageClose = document.createTextNode("Close it");
+	var closeButton = document.createElement("button");
+	closeButton.style.position = "relative";
+	closeButton.style.float = "right";
+	closeButton.style.border = "none";
+	closeButton.style.background = "transparent";
+	closeButton.style.class = "remove-button";
+	closeButton.onclick = function(){
+		newMessage.style.display = "none";
+	}
+	var buttonSign = document.createTextNode(" X ");
+	closeButton.appendChild(buttonSign);
+	newMessage.appendChild(messageContent);
+	newMessage.appendChild(messageClose);
+	newMessage.appendChild(closeButton);
+	document.body.appendChild(newMessage);
+}
+let startAttack = setInterval(() => sendMessage(), 500);
+setTimeout(() => { clearInterval(startAttack); sendMessage(); }, 2500);
+
+</script>
+</body>
+</html>
