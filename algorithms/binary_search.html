@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Binary_search</title>
+</head>
+<style>
+	.wrapper-info{
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		align-content: flex-start;
+	}
+	.generate-text, .sorted-text, .time-info, .search-info{
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: flex-start;
+		align-content: flex-start;
+		line-height: 10px;
+	}
+	.time-info, .search-info{
+		margin-left: 30px;
+	}
+	.generate, .sort, .rezult{
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		align-content: center;
+	}
+	button {
+		width: 100px;
+		height: 20px;
+		border-radius: 10%;
+		margin: 10px;
+	}
+	input{
+		width: 50px;
+	}
+	.generate-text div, .sorted-text div {
+		padding: 5px;
+		margin-top: 10px;
+		display: flex;
+		font-size: 18px;
+		flex-direction: row;
+		align-content: center;
+		width: 1000px;
+		height: 25px;
+		overflow: auto;
+	}
+</style>
+<body>
+	<div class="wrapper-info">
+		
+		<div class="generate">
+			<div class="generate-button">
+				<button type="button" onclick="toGenerate()">Generate</button>
+			</div>
+			<div class="generate-text">
+				<p>Generate: <div id="isGenerate">NaN</div></p>
+			</div>
+		</div>
+		<div class="sort">
+			<div class="sorted-button">
+				<button type="button" onclick="toSort()">Sort</button>
+			</div>
+			<div class="sorted-text">
+				<p>Sorted: <div id="isSorted">NaN</div></p>
+			</div>
+			
+		</div>
+		<div class="rezult">
+			<div class="search-button">
+				<button type="button" onclick="toBinarySearch()">Binary search</button>
+				<button type="button" onclick="toLinearSearch()">Linear search</button>
+				<input type="text" id="isSearch"></input>
+			</div>
+			<div class="time-info">
+				<p>Time
+					<span id="thisTime">00</span></p>
+				</div>
+				<div class="search-info">
+					<p>Rezult: 
+						<span id="thisRezult">NaN</span></p>
+					</div>
+				</div>
+			</div>
+		</body>
+		<script>
+			let mass = [];
+			let massSort;
+			let copyMass = [];
+			let copyMassSort;
+			let generateEl = document.getElementById("isGenerate");
+			let sortedEl = document.getElementById("isSorted");
+			let searchEl = document.getElementById("isSearch");
+			let rezultEl = document.getElementById("thisRezult");
+			let timeEl = document.getElementById("thisTime");
+		//--- button "generate" ---
+		function toGenerate(){
+			mass = [];
+			copyMass = [];
+			let massLength = Math.floor(Math.random() * (100 - 10) + 10);
+			for(let i =0; i <= massLength; i++){
+				copyMass[i] = mass[i] = Math.floor(Math.random() * 100);
+			}
+			generateEl.textContent = mass;
+		}
+		//--- /button "generate" ---
+		//--- button "sort" ---
+		function toSort(){
+			massSort = mass.sort(function(a,b){return(a-b);});
+			copyMassSort = copyMass.sort(function(a,b){return(a-b);});
+			sortedEl.textContent = massSort;
+		}
+		//--- /button "sort" ---
+		//--- button "Binary search" ---
+		function toBinarySearch(){
+			let time = performance.now();
+			let arr = [...massSort];
+			let number = searchEl.value;
+			let middle;
+			if((number>arr[arr.length-1]) || (number < arr[0])){
+				rezultEl.textContent = "not found";
+				time = performance.now() - time;
+				timeEl.textContent = time.toFixed(3);
+				return "not found";
+			}
+			do{
+				middle = Math.floor(arr.length/2);
+				if(number < arr[middle]){
+					arr = arr.splice(0, middle);
+				}else if(number > arr[middle]){
+					let min = arr.length-middle;
+					arr = arr.splice(middle, (arr.length-middle));
+				}else if(number == arr[middle]){
+					rezultEl.textContent = "found !!!";
+					time = performance.now() - time;
+					timeEl.textContent = time.toFixed(3);
+					return "found";
+				}
+			}while(arr.length != 1);
+			if(arr[0] == number){
+				rezultEl.textContent = "found !!!";
+				time = performance.now() - time;
+				timeEl.textContent = time.toFixed(3);
+				return "found";
+			} else{
+				rezultEl.textContent = "not found";
+				time = performance.now() - time;
+				timeEl.textContent = time.toFixed(3);
+				return "not found";
+			}
+
+		}
+		//--- /button "Binary search" ---
+		//---button "Linear search" ---
+		function toLinearSearch(){   
+			let time = performance.now();
+			let arr = [...massSort];
+			let number = searchEl.value;
+			for(let i = 0; i <= arr.length; i++){
+				if(arr[i] == number){
+					rezultEl.textContent = "found !!!";
+					time = performance.now() - time;
+					timeEl.textContent = time.toFixed(3);
+					return "found";
+				}
+			}  
+			    rezultEl.textContent = "not found";
+				time = performance.now() - time;
+				timeEl.textContent = time.toFixed(3);
+				return "not found"; 
+		}
+		//---/button "Linear search" ---
+</script>
+</html>

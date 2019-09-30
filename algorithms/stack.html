@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Stack</title>
+</head>
+<body>
+	
+</body>
+<script>
+	class Stack {
+		constructor() {
+			this.content = [];
+		}
+		push(el) {
+			this.content.push(el);
+		}
+		pop() {
+			if(this.content.length != 0){
+				this.content.pop();		
+			}else{
+				console.log("pop: stack empty");
+			}
+		}
+		peek() {
+			if(this.content.length != 0){
+				return this.content[this.content.length-1];
+			}else{
+				console.log("peek: stack empty");
+			}
+		}
+		printStack() {
+			let str = "";
+			for(let key of this.content){
+				str += key + " ";
+			}
+			return str;
+		}
+
+		size(){
+			return this.content.length;
+		}
+		
+}//class
+
+let st = new Stack();
+st.push("A");
+st.push("B");
+st.printStack();
+st.push("C");
+st.size();
+st.printStack();
+st.peek();
+</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Queue</title>
+</head>
+<body>
+	
+</body>
+<script >
+	class Queue {
+		constructor() {
+			this.content = [];
+		}
+		enqueue(data) {
+			this.content.push(data);
+		}
+		dequeue() {
+			if(this.content.length != 0){
+				this.content.shift();
+			}else{
+				console.log("queue is empty");
+			}
+			
+		}
+		printQueue() {
+			if(this.content.length !=0 ){
+				let str = "";
+			for(let key of this.content){
+				str += key + " ";
+			}
+			return str;
+		}else{
+			return "queue is empty";
+		}
+			
+		}
+		size(){
+			return this.content.length;
+		}
+	}
+	let qu = new Queue();
+	alert(qu.printQueue());
+	qu.enqueue("A");
+	qu.enqueue("B");
+	qu.enqueue("C");
+	qu.dequeue();
+	alert("print: " + qu.printQueue());
+	alert("size: " +  qu.size());
+</script>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+	<script>
+  	  mocha.setup('bdd');
+	</script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
+	 <script>
+    var assert = chai.assert;
+  </script>
+	
+	<title>Linked list simple</title>
+</head>
+<body>
+	<div id="mocha"></div>
+</body>
+<script src="linked list-test.js"></script>
+<script>
+	class Node{
+		constructor(elem) {
+			this.content = elem;
+			this.nextEl = null;
+			}
+	}
+	class LinkedList {
+		constructor(){
+			this.head = null;
+			this.tail = null;
+			this.size = 0;
+		}
+
+	addFirst(elem) {
+			let node = new Node(elem);
+			let currentNode = this.head;
+			if(this.head == null){
+				this.tail = node;
+				this.head = node;
+				this.size++;
+			}else{
+				node.nextEl = currentNode;
+				this.head = node;
+				this.size++;
+			}
+			return node;
+			
+	}
+	addLast(elem) {
+			let node = new Node(elem);
+			let currentNode = this.tail;
+
+			if(this.head == null){
+				this.tail = node;
+				this.head = node;
+				this.size++;
+			}else{
+				currentNode.nextEl = node;
+				this.tail = node;
+				this.size++;
+			}
+			return node;
+		
+	}
+	removeFirst() {
+		let currentNode = this.head;
+		if(this.head == null){
+				return "first not found";
+			}else{
+				this.head = currentNode.nextEl;
+				this.size--;
+				return currentNode;
+			}
+	}
+	removeLast() {
+		if(this.tail == null){
+				return "last not found";
+			}else{
+				let oldTail = this.tail;
+				let perviousNode = this.searchNodeAt(this.size-2);
+				this.tail = perviousNode;
+				this.tail.nextEl= null;
+				this.size--;
+				return oldTail;
+			}
+	}
+	getFirst() {
+		return this.head.content;
+	}
+	getLast() {
+		return this.tail.content;
+	}
+	printList() {
+		let current = this.head;
+		let str = "" + current.content;
+		do{
+			current = current.nextEl;	
+			str += " " + current.content;
+		}while(current.nextEl != null);
+		return str;
+	}
+	searchNodeAt(position)  {
+		let current = this.head;
+		let iter = 0;
+		if(iter != position){
+					do{
+			current = current.nextEl;
+			iter++;	
+		}while(iter != position);
+	}
+		return current;
+	}
+	insertNodeAt(position, elem) {
+		if(position == 0){
+			this.addFirst(elem);
+		}else if(position == (this.size-1)){
+			this.addLast(elem);
+		}else {
+			let node = new Node(elem);
+			let currentNode = this.searchNodeAt(position);
+			let pervNode = this.searchNodeAt(position -1);
+			pervNode.nextEl = node;
+			node.nextEl = currentNode;
+		}
+		this.size++;
+	}
+	remove(position) {
+		if(position === 0){
+			this.removeFirst();
+		}else if(position == (this.size-1)){
+			this.removeLast();
+		}else {
+			let currentNode = this.searchNodeAt(position);
+			let nextNode = currentNode.nextEl;
+			let perviousNode = this.searchNodeAt(position - 1);
+			perviousNode.nextEl = nextNode;
+		}
+		
+		this.size--;
+	}
+	getSize() {
+		return this.size;
+	}
+}
+</script>
+<script>
+    mocha.run();
+  </script>
+</html>
