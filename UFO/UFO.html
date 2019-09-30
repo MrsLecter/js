@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ufo</title>
+</head>
+<style type="text/css">
+	*{
+	padding: 0;
+	font-family: "Tahoma", Regular;
+	font-size: 16px;
+	color: black;
+}
+#field{
+	position: relative;
+	width: 800px;
+	height: 500px;
+	background-color: #AFEEEE;
+	overflow: hidden;
+	border: 1px solid black;
+}
+#ufo{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100px;
+	width: 100px;
+	transition: 1s all;
+}
+.top-panel{
+	width: 800px;
+	height: 30px;
+	background-color: #00FF7F;
+	border-width: 1px 1px 0px 1px;
+	border-style: solid;
+	border-color: black;
+}
+.top-panel__coord{
+	margin-top: 5px;
+	width: 800px;
+	height: 30px;
+	display: flex;
+	text-align: center;
+	align-content: center;
+	justify-content: center;
+}
+</style>
+<body>
+	<div class="container">
+		<div class="top-panel">
+			<div id="coord" class="top-panel__coord"></div>
+		</div>
+		<div id="field" class="field">
+			<img id="ufo" src="https://icons-for-free.com/iconfiles/png/128/character+game+inkcontober+misterious+ufo+icon-1320183876369250864.png" alt="ufo">
+			<img src="" alt="">
+		</div>
+		<div class="bottom-panel">
+			<p>Клик мышкой на поле для перемещения</p>
+		</div>
+	</div>
+	<script>
+		let fieldElem = document.getElementById("field");
+		let ufoElem = document.getElementById("ufo");
+		let coordElem =  document.getElementById("coord");
+		let startButt =  document.getElementById("start");
+		var timeId = 0;
+		var astr = 0;
+
+		fieldElem.onclick = function(event) {
+			let fieldCoords = this.getBoundingClientRect();
+			coordElem.innerHTML = "X: " + event.clientX + " Y: " + event.clientY;
+			ufoElem.style.left = event.clientX - fieldCoords.left - (ufoElem.clientWidth/2) + "px";
+			ufoElem.style.top = event.clientY -fieldCoords.top - (ufoElem.clientHeight/2) +  "px";
+			getAsteroid();
+		};
+	</script>
+</body>
+</html>
