@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Корзина</title>
+</head>
+<style>
+	.field{
+		width: 800px;
+		height: 500px;
+		background-color: lightblue;
+		border: 1px solid black;
+	}
+	#ball{
+		width: 50px;
+		height: 50px;
+		position: absolute;
+		padding: 0;
+		margin: 0;
+		z-index: 3;
+		transition: 0.5s all;
+		padding: 10px;
+	}
+	#basket{
+		width: 100px;
+		height: 110px;
+		transform: translate(700px, 390px);
+		border: 1px solid red;
+	}
+	#score{
+		width: 50px;
+		height: 20px;
+		transform: translate(620px, 360px);
+		border: none;
+		border-radius: 10px;
+		font-weight: bold;
+		text-align: center;
+	}
+
+</style>
+<body>
+	<div class="conteiner">
+		<div class="field">
+			<div class="ball-wrapper" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<img draggable="true" id="ball" ondragstart="drag(event)" src="http://s1.iconbird.com/ico/0612/VistaStyleSportIconSet/w256h2561339399121TennisBall.png" alt="ball">
+			</div>
+			<img id="basket" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)" src="http://s1.iconbird.com/ico/0912/Kitchen/w128h12813483244379.png" alt="basket">
+			<input type="text" value="0" id="score"></input>
+		</div>
+		<p>Клик на мяче, зажать клавишу, переместить, отпустить</p>
+	</div>
+	<script>
+		let randPosX = (Math.random() * 800)+ "px";
+		let randPosY = (Math.random() * 500) + "px";
+		let currentDroppable = null;
+		let score = document.getElementById("score");
+		let count = 0;
+		ball.onmousedown = function(event){
+			let posX = event.clientX - ball.getBoundingClientRect().left;
+			let posY = event.clientY - ball.getBoundingClientRect().top;
+
+			document.body.append(ball);
+			moveAt(event.pageX, event.pageY);
+			function moveAt(pageX, pageY){
+				ball.style.left = pageX - posX + "px";
+				ball.style.top = pageY -posY + "px";
+			}
+			function onMouseMove(event) {
+				moveAt(event.pageX, event.pageY);
+
+				ball.hidden = true;
+				let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+				ball.hidden = false;
+				if (!elemBelow){ return;}
+				let droppableBelow = elemBelow.closest(".droppable");
+				if (currentDroppable != droppableBelow) {
+      			  if (currentDroppable) {
+     				 basket.style.borderWidth = "1px";
+  				  }
+  				  currentDroppable = droppableBelow;
+   				 if (currentDroppable) {
+   				 	basket.style.borderWidth = "5px";
+    				count++;
+    			    score.value = count;
+    			    ball.style.display = "none";
+    			     ball.hidden = true;
+    			    
+    			 }
+  				}
+			}
+			document.addEventListener('mousemove', onMouseMove);
+			ball.onmouseup = function() {
+				document.removeEventListener('mousemove', onMouseMove);
+				ball.onmouseup = null;
+			};
+
+			
+		};
+		ball.ondragstart = function() {
+			return false;
+		};
+			/*
+			function enterDroppable(elem) {
+				elem.style.backgroundColor = 'pink';
+			}
+			*/
+		/*
+		  function allowDrop(ev) {
+	  		ev.preventDefault();
+		}
+		function drag(ev) {
+		  ev.dataTransfer.setData("text", ev.target.id);
+		  ev.dataTransfer.dropEffect = "copy";
+		  ev.preventDefault();
+		  }
+		function drop(ev) {
+		  ev.preventDefault();
+		  var data = ev.dataTransfer.getData("text");
+		  //ev.target.appendChild(document.getElementById(data));
+		 // event.target.textContent = data;
+		  count++;
+		  score.value = count;
+		};
+		*/
+	</script>
+</body>
+</html>
