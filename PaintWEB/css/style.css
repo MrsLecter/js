@@ -1,0 +1,140 @@
+canvas {
+	display: block;
+	//background-color: lightgreen;
+	margin: 0;
+	padding: 0;
+	border: 1px solid black;
+}
+.wrapper {
+	display: flex;
+	flex-direction: flex-row;
+	margin: 0;
+	padding: 0;
+	height: 150px;
+}
+
+.use{
+	height: 180px;
+	width: 25%;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+.nowUse{
+	margin-top: 30px;
+	height: 50px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+#nowUseColor{
+	width: 40px;
+	height: 40px;
+	background-color: green;
+	margin: 10px;
+}
+#thickness{
+	width: 100px;
+	background-color: black;
+	height: 1px;
+	margin: 10px;
+}
+#thicknessText{
+	width: 30px;
+	margin: 5px;
+}
+.button-wrapper{
+	box-sizing: border-box;
+	height: 150px;
+	width: 25%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.button{
+	position: relative;
+	margin: 5px;
+	border: 1px solid black;
+	border-radius: 3px;
+	background-color: #B4FBB9;
+	width: 100px;
+	height: 15px;
+	left: 40%;
+	display: flex;
+	justify-content :center;
+	text-align: center;
+	font-size: 14px;
+}
+.button .button-text{
+	visibility: hidden;
+	width: 100px;
+	background-color: #BBFCB6;
+	color: #000;
+	text-align: center;
+	padding:1px 0;
+	border-radius: 5px;
+	position: absolute;
+	z-index: 1;
+	bottom: 50%;
+	left: 120%;s
+	margin-left: -20%;
+
+	opacity: 0%;
+	transition: opacity: 0.3s;
+
+}
+.button:hover .button-text {
+	visibility: visible;
+	opacity: 1;
+}
+.slider{
+	width: 25%;
+	height: 150px;
+	text-align: center;
+}
+.rangeSlider:hover {
+  opacity: 1;
+}
+.color-wrapper {
+	width: 50%;
+	height: 30px;
+	margin-top: -5%;
+	padding-left: 5%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+.color-wrapper .button{
+	width: 20px;
+	height: 20px;
+	border: 1px solid black;
+}
+.color_black{
+	background-color: black;
+}
+.color_red{
+	background: #FF0000;
+}
+.color_green{
+	background: #076D09;
+}
+.color_blue{
+	background: #0034F7;
+}
+.button-important {
+	width: 15%;
+	height: 150px;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+}
+.button-important .button{
+	width: 100px;
+	height: 30px;
+	font-size: 14px;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+}
