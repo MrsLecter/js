@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	
+	<title>PaintWEB</title>
+	<link rel="stylesheet" href="./css/style.css">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+	</head>
+<body>
+	<canvas id="canvas">Canvas don't work!</canvas>
+<div class="wrapper">
+		<div class="use"> 
+			<p>Сейчас используется:</p>
+			<div class="nowUse">
+				<p>Цвет</p>
+				<div id="nowUseColor"></div>
+				<p>Толщина: </p>
+				<p id="thicknessText"> 1px </p>
+				<div id="thickness"></div>
+
+			</div>
+		</div>
+		<div class="button-wrapper">
+			<div class="button" onclick="toClean()"><i class="fas fa-broom"></i><span class="button-text">Очистить</span></div>
+			<div class="button" onclick="toNextColor()"><i class="fas fa-exchange-alt"></i><span class="button-text">Следующий цвет</span></div>
+		</div>
+		<div class="slider">
+			<p>Изменить размер кисти</p>
+			<input type="range" min="1" max="50" value="5" class="rangeSlider" id="range"> 
+			<p>Сменить цвет</p>
+			<div class="color-wrapper">
+			<div class="button color_black" onclick="toBlack()"></div>
+			<div class="button color_red" onclick="toRed()"></div>
+			<div class="button color_green" onclick="toGreen()"></div>
+			<div class="button color_blue" onclick="toBlue()"></div>
+			</div>
+		</div>
+		<div class="button-important">
+			<div class="button" onclick="toImage()"><i class="fas fa-save"></i><span class="button-text">Сохранить как изображение</span></div>
+			<div class="button" onclick="toErase()"><i class="fas fa-minus-square"></i><span class="button-text">Резинка</span></div>
+			<div class="button" onclick="toPencil()"><i class="fas fa-pencil-alt"></i><span class="button-text">Использовать карандаш</span></div>
+		</div>
+</div>
+</body>
+<script src="./js/game.js" ></script>
+</html>
